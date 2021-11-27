@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import Accordion from "./Components/Accordion";
+import { items, options } from "./util";
+import Search from "./Components/Search";
+import DropDown from "./Components/DropDown";
+import { useState } from "react/cjs/react.development";
+import Translate from "./Components/Translate";
+import Route from "./Components/Route";
+import Header from "./Components/Header";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+
+    const [selectedColor,setSelectedColor] = useState(options[0]);
+
+    return(
+        <div>
+            <Header />
+            <Route path="/" >
+                <Accordion items={items} />
+            </Route>
+            <Route path="/list">
+                <Search />
+            </Route>
+            <Route path="/dropdown">
+                <DropDown options={options} selected={selectedColor} onDdChange={setSelectedColor} label="color"/>
+            </Route>
+            <Route path="/translate">
+                <Translate />
+            </Route>
+        </div>
+    );
 }
 
 export default App;
